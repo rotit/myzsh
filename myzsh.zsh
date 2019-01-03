@@ -1,16 +1,21 @@
+
 #########################################zsh
 plugins=(
   git
   z
+  #history-subsrting-search
+
   zsh-syntax-highlighting
   zsh-autosuggestions
-  history-subsrting-search
+  incr
 )
 
 #autojump
-[[ -s /home/jinmin/.autojump/etc/profile.d/autojump.sh ]] && source /home/jinmin/.autojump/etc/profile.d/autojump.sh
+#[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && source ~/.autojump/etc/profile.d/autojump.sh
 #autoload -U compinit && compinit -u
 
+#autosuggestions
+#[[ -s ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 #########################################end
 
 
@@ -28,7 +33,16 @@ function fa()
 
 }
 
-function mfc()
+function ra()
+{
+    local cmd
+	dir=$1
+	echo "==============> FIND [a] in dir: [$dir] <================="
+
+	find $dir -name .repo -prune -o -name .git -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name  '*.h' \)  >> files
+}
+
+function sc()
 {
 	cnt=$1
 	dir=$2
@@ -54,7 +68,8 @@ function cf()
 {
 	local cmd
 	echo "==============> FIND"
-	cat files |grep "$2" | xargs grep "$1" --color -i -n -C0 "$3"
+	#cat files |grep "$2" | xargs grep "$1" --color -i -n -C0 "$3"
+	cat files | xargs grep "$1" --color -i -n -C0 "$2"
 }
 
 function fz()
@@ -182,7 +197,21 @@ function fd()
 	echo "===============> find [$1] in dir: [$2] <================="
 	find $2 -name $1 -type d
 }
+
 #########################################end
+
+##########################################
+function py()
+{
+	sed  -ne '1p' $1 | sed  -e 's/.*:= \(.*\)/\1/g' | cut -d ' ' -f 3- | sed -ne 's/ *\(.*\)/\1/gp' |awk '{ for(i=1;i<=NF;i++) { if($(i+1)~"^-") ORS="\n";else ORS=" "; print $i }} END {print "\n"}'  |sed '/--sysroot/,+7d' | sed "s/.*/\'&\',/g"
+
+}
+##########################################
+
+
+##########################################
+export PATH=$PATH:~/gongju/clang_llvm-8.0.0/bin/
+##########################################
 
 #########################################git
 git config --global alias.st status
