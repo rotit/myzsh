@@ -3,11 +3,11 @@
 plugins=(
   git
   z
-  #history-subsrting-search
+  zsh-history-substring-search
 
   zsh-syntax-highlighting
-  zsh-autosuggestions
-  incr
+  #zsh-autosuggestions
+  #incr
 )
 
 #autojump
@@ -215,6 +215,7 @@ export PATH=$PATH:~/gongju/clang_llvm-8.0.0/bin/
 
 #########################################git
 git config --global alias.st status
+git config --global alias.l "log --graph --pretty=format:'%Cred%h%Creset %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd)' --abbrev-commit"
 #########################################end
 
 #########################################others

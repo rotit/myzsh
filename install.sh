@@ -42,10 +42,17 @@ fi
 ###autosuggestions
 if git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 then
-	echo clone done autosuggestions
+	echo clone done zsh-autosuggestions
 	#echo "source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 else
 	echo has alreay clone autosuggestions
+fi
+
+if git clone https://github.com/zsh-users/zsh-history-substring-search ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-history-substring-search
+then
+	echo clone done zsh-history-substring-search
+else
+	echo has already clone zsh-history-substring-search
 fi
 
 ###zsh-incr
