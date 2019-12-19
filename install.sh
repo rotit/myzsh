@@ -8,6 +8,7 @@ then
 	name=$(whoami)
 	sudo chsh -s /bin/zsh $(name)
 	sed -i "s#ZSH=\$HOME/\.oh-my-zsh#ZSH=$PWD/oh-my-zsh#" ~/.zshrc
+	sed -i "s/ZSH_THEME=.*/ZSH_THEME=\"dst\"/" ~/.zshrc
 
 	if ! grep "source $PWD" ~/.zshrc
 	then
